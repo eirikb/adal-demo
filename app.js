@@ -53,7 +53,7 @@ function getResourcePopup() {
   console.log('getResourcePopup');
   showHide();
 
-  authContext.acquireTokenPopup(resource, null, null, function (errorDesc, token, error) {
+  authContext.acquireTokenPopup(resource, null, null, (errorDesc, token, error) => {
     console.log('acquireTokenPopup');
     callback({errorDesc, token, error});
   });
