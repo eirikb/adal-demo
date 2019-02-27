@@ -31,6 +31,8 @@ function callback({errorDesc, token, error, tokenType}) {
   }
   if (tokenType === 'id_token') {
     getResource();
+  } else if (error === 'login required') {
+    showHide('login');
   } else if (error) {
     // Final hope
     showHide('resourcepopup');
