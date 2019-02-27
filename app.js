@@ -14,12 +14,13 @@ document.querySelector('#login').addEventListener('click', () => authContext.log
 document.querySelector('#resource').addEventListener('click', getResource);
 document.querySelector('#resourcepopup').addEventListener('click', getResourcePopup);
 document.querySelector('#getuser').addEventListener('click', getUser);
+document.querySelector('#faketokentimeout').addEventListener('click', fakeTokenTimeout);
 
 const info = document.querySelector('#info');
 
-function showHide(id) {
+function showHide(...ids) {
   document.querySelectorAll('button').forEach(el => el.style.display = 'none');
-  if (id) {
+  for (let id of ids) {
     document.querySelector(`#${id}`).style.display = '';
   }
 }
@@ -84,8 +85,12 @@ function getUserWithToken(token) {
   }).then(res => res.json()).then(me => {
     info.innerText = 'Done!';
     console.log('done', me);
-    showHide('getuser');
+    showHide('getuser', 'faketokentimeout');
   });
+}
+
+function fakeTokenTimeout() {
+  sessionStorage['adal.expiration.keyhttps://graph.microsoft.com'] = 1;
 }
 
 if (authContext.isCallback(window.location.hash)) {
