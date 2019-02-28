@@ -1,7 +1,14 @@
+let popUp = true;
+
+if (window.location.hash.match(/nopopup/)) {
+  console.log('disable PopUp');
+  popUp = false;
+}
+
 const resource = 'https://graph.microsoft.com';
 const config = {
+  popUp,
   clientId: '8cc739ac-fd78-4687-b9e8-13d8e461150c',
-  popUp: true,
   callback(errorDesc, token, error, tokenType) {
     console.log('callback');
     callback({errorDesc, token, error, tokenType});
